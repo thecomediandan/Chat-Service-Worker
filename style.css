@@ -1,0 +1,70 @@
+:root{
+    font-family: monospace;
+    font-size: 20px;
+}
+body{
+    background-color: rgb(91, 107, 107);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    width: 60%;
+
+}
+input{
+    font-family: monospace;
+    font-size: 20px;
+}
+.chat-zone{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    background-color: rgb(59, 152, 126);
+    box-sizing: border-box;
+}
+.message{
+    max-width: 70%;
+    padding: 6px;
+    margin-top: 16px;
+    border-radius: 12px;
+}
+.my-message{
+    background-color: rgb(57, 176, 39);
+    border-top-right-radius: 0;
+    align-self: flex-end;
+    margin-right: 12px;
+}
+.your-message{
+    background-color: rgb(75, 114, 148);
+    border-top-left-radius: 0;
+    align-self: flex-start;
+    margin-left: 12px;
+}
+.chat-zone .message:last-child{
+    margin-bottom: 16px;
+}
+.inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-color: rgb(75, 114, 148);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 12px;
+}
+#input-text{
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid white;
+    background-color: inherit;
+}
+#input-button{
+    background-color: rgb(56, 148, 102);
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    margin-left: 12px;
+}
