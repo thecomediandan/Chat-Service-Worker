@@ -1,6 +1,9 @@
 :root{
-    font-family: monospace;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Source Code Pro', monospace;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
+    color: white;
 }
 body{
     background-color: rgb(91, 107, 107);
@@ -13,7 +16,9 @@ body{
 
 }
 input{
-    font-family: monospace;
+    font-family: 'Pacifico', cursive;
+    font-family: 'Source Code Pro', monospace;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
 }
 .chat-zone{
@@ -29,6 +34,18 @@ input{
     padding: 6px;
     margin-top: 16px;
     border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: justify;
+}
+.time{
+    display: flex;
+    text-align: end;
+    align-items: end;
+    font-size: 13px;
+    color: rgb(219, 225, 231);
+    padding-left: 8px;
 }
 .my-message{
     background-color: rgb(57, 176, 39);
@@ -60,11 +77,21 @@ input{
     outline: none;
     border-bottom: 2px solid white;
     background-color: inherit;
+    color: white;
+}
+#input-text::placeholder{
+    color: rgb(219, 225, 231);
 }
 #input-button{
     background-color: rgb(56, 148, 102);
     border: none;
     outline: none;
-    border-radius: 6px;
-    margin-left: 12px;
+    border-radius: 50%;
+    margin: auto;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    width: 43px;
+    height: 43px;
 }

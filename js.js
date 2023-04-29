@@ -14,11 +14,29 @@ navigator.serviceWorker.ready.then(res => {
 
 let apiRequest;
 
-function createMessageElement(msg, id){
+function getHourMinutes(){
+    const date = new Date();
+    let hours, minutes;
+    hours = date.getHours();
+    minutes = date.getMinutes();
+    if (date.getHours().toString().length == 1) {
+        hours = "0" + date.getHours();
+    }
+    if (date.getMinutes().toString().length == 1) {
+        minutes = "0" + date.getMinutes();
+    }
+    return hours + ":" + minutes;
+}
+
+function createMessageElement(msg, id, time){
     let fragment = document.createDocumentFragment();
     let chatContent = document.createElement('div');
+    let chatTime = document.createElement('div');
 
     chatContent.textContent = msg;
+    chatTime.textContent = time;
+    chatTime.classList = 'time'; 
+    chatContent.appendChild(chatTime);
     if (id == idUser) {
         chatContent.classList = 'message my-message';   
     } else {
@@ -30,11 +48,11 @@ function createMessageElement(msg, id){
 }
 
 function refreshChatZone(){
-    let chatZone = window.document.querySelector('.chat-zone');
+    let chatZone = document.querySelector('.chat-zone');
     chatZone.innerHTML = "";
     for (const chat of apiRequest) {
         console.log(chat);
-        let fragment = createMessageElement(chat.message, chat.idUser);
+        let fragment = createMessageElement(chat.message, chat.idUser, chat.time);
         chatZone.appendChild(fragment);
     }
 }
@@ -50,15 +68,6 @@ navigator.serviceWorker.addEventListener("message", e=>{
         apiRequest = e.data[1];
         console.log(e.data[1]);
         refreshChatZone();
-        
-        // let chatZone = window.document.querySelector('.chat-zone');
-        // let fragment;
-        // if (e.data[1].idUser == idUser) {
-        //     fragment = createMessageElement(e.data[1].message, true);
-        // }else{
-        //     fragment = createMessageElement(e.data[1].message, false);
-        // }
-        // chatZone.appendChild(fragment);
     }
 
 });
@@ -70,7 +79,7 @@ inputButton.addEventListener('click', ()=>{
     let msg = inputText.value;
     navigator.serviceWorker.ready.then(res => {
         if(msg != ""){
-            res.active.postMessage([{'issue': 'message'}, {'message': msg, 'idUser': idUser}]);
+            res.active.postMessage([{'issue': 'message'}, {'message': msg, 'idUser': idUser, 'time': `${getHourMinutes()}`}]);
         }else{
             alert("No puedes enviar mensajes vacios.");
         }    

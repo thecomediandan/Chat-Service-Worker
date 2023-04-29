@@ -14,16 +14,12 @@ self.addEventListener("fetch", () => {
 });
 
 let apiMessage = [];
-let users = [];
-let count = 0;
 self.addEventListener("message", (e) => {
   console.log("Mensaje recibido del navegador:");
   if (e.data[0].issue == 'getUser') {
-    users[count] = count;
-    e.source.postMessage([{'issue': 'setUser', 'setUser': count}]);
+    e.source.postMessage([{'issue': 'setUser'}, {'setUser': e.source.id}]);
     console.log("idTab: " + e.source.id);
     console.log('issue: ' + e.data[0].issue);
-    count ++;
   }
   if (e.data[0].issue == 'message') {
     apiMessage.push(e.data[1]);
