@@ -13,8 +13,27 @@ self.addEventListener("fetch", () => {
   console.log("Service Worker interceptando peticion.");
 });
 
+let apiMessage = [];
+let users = [];
+let count = 0;
 self.addEventListener("message", (e) => {
   console.log("Mensaje recibido del navegador:");
-  console.log(e.data); // Para enviar un mensaje desde el Service Worker, accedemos al metodo source
-  e.source.postMessage("Saludando al navegador.");
+  if (e.data[0].issue == 'getUser') {
+    users[count] = count;
+    e.source.postMessage([{'issue': 'setUser', 'setUser': count}]);
+    console.log("idTab: " + e.source.id);
+    console.log('issue: ' + e.data[0].issue);
+    count ++;
+  }
+  if (e.data[0].issue == 'message') {
+    apiMessage.push(e.data[1]);
+    self.clients.matchAll().then(clients => {
+      clients.forEach(client => {
+        console.log(client);
+        client.focused = true;
+        client.postMessage([{'issue': 'message'}, apiMessage]);
+        client.focused = false;   
+      });
+    })
+  }
 });
