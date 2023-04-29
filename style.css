@@ -95,3 +95,7 @@ input{
     width: 43px;
     height: 43px;
 }
+#input-button:hover{
+    background-color: white;
+    color: rgb(56, 148, 102);
+}

@@ -62,7 +62,9 @@ navigator.serviceWorker.addEventListener("message", e=>{
     console.log("Mensaje recibido del Service Worker:");
     if (e.data[0].issue == 'setUser') {
         idUser = e.data[1].setUser;
+        apiRequest = e.data[2];
         console.log("idUser: " + idUser);
+        setInterval(refreshChatZone(), 2000);
     }
     if (e.data[0].issue == 'message') {
         apiRequest = e.data[1];
@@ -79,9 +81,29 @@ inputButton.addEventListener('click', ()=>{
     let msg = inputText.value;
     navigator.serviceWorker.ready.then(res => {
         if(msg != ""){
+            inputText.value = "";
+            inputText.focus();
             res.active.postMessage([{'issue': 'message'}, {'message': msg, 'idUser': idUser, 'time': `${getHourMinutes()}`}]);
         }else{
             alert("No puedes enviar mensajes vacios.");
         }    
     });
 });
+inputText.addEventListener('focus', ()=>{
+    addEventListener('keypress', (e)=>{
+        console.log("Tecla presionada:");
+        console.log(e);
+        if (e.key == 'Enter') {
+            let msg = inputText.value;
+            navigator.serviceWorker.ready.then(res => {
+                if(msg != ""){
+                    inputText.value = "";
+                    inputText.focus();
+                    res.active.postMessage([{'issue': 'message'}, {'message': msg, 'idUser': idUser, 'time': `${getHourMinutes()}`}]);
+                }else{
+                    alert("No puedes enviar mensajes vacios.");
+                }    
+            });
+        }
+    })
+})

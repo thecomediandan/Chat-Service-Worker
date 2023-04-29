@@ -17,7 +17,7 @@ let apiMessage = [];
 self.addEventListener("message", (e) => {
   console.log("Mensaje recibido del navegador:");
   if (e.data[0].issue == 'getUser') {
-    e.source.postMessage([{'issue': 'setUser'}, {'setUser': e.source.id}]);
+    e.source.postMessage([{'issue': 'setUser'}, {'setUser': e.source.id}, apiMessage]);
     console.log("idTab: " + e.source.id);
     console.log('issue: ' + e.data[0].issue);
   }
