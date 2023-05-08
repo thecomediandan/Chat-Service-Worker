@@ -12,7 +12,7 @@ body{
     justify-content: center;
 }
 .container{
-    width: 60%;
+    width: 40%;
 
 }
 input{
@@ -98,4 +98,10 @@ input{
 #input-button:hover{
     background-color: white;
     color: rgb(56, 148, 102);
+}
+
+@media (max-width: 768px){
+    .container{
+        width: 100%;
+    }
 }
